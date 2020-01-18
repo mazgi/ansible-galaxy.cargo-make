@@ -1,0 +1,40 @@
+---
+- name: Stat cargo-make command
+  stat:
+    path: /usr/local/bin/hub
+  register: cargo_make_command
+- name: Install cargo-make command
+  when: hub_command.cargo_make_command.executable is not defined
+  vars:
+    cargo_make_version: "0.26.1"
+  block:
+    - name: Create temporary directory for cargo-make
+      tempfile:
+        state: directory
+      register: temporary_directory_for_cargo_make
+    - name: Download and extract cargo-make for Linux
+      when: ansible_system == "Linux" and ansible_architecture == "x86_64"
+      unarchive:
+        src: "https://github.com/sagiegurari/cargo-make/releases/download/{{ cargo_make_version }}/cargo-make-v{{ cargo_make_version }}-x86_64-unknown-linux-musl.zip"
+        dest: "{{ temporary_directory_for_cargo_make.path }}"
+        remote_src: true
+    - name: Install cargo-make for Linux
+      when: ansible_system == "Linux" and ansible_architecture == "x86_64"
+      copy:
+        remote_src: true
+        src: "{{ temporary_directory_for_cargo_make.path }}/cargo-make-v{{ cargo_make_version }}-x86_64-unknown-linux-musl/cargo-make"
+        dest: /usr/local/bin/
+        mode: a+rx
+    - name: Download and extract cargo-make for macOS
+      when: ansible_distribution == "MacOSX"
+      unarchive:
+        src: https://github.com/sagiegurari/cargo-make/releases/download/{{ cargo_make_version }}/cargo-make-v{{ cargo_make_version }}-x86_64-apple-darwin.zip
+        dest: "{{ temporary_directory_for_cargo_make.path }}"
+        remote_src: true
+    - name: Install cargo-make for macOS
+      when: ansible_distribution == "MacOSX"
+      copy:
+        remote_src: true
+        src: "{{ temporary_directory_for_cargo_make.path }}/cargo-make-v{{ cargo_make_version }}-x86_64-apple-darwin/cargo-make"
+        dest: /usr/local/bin/
+        mode: a+rx
