@@ -1,4 +1,19 @@
 ---
+- name: Install dependencies
+  portage:
+    package: "{{ item }}"
+    update: yes
+  with_items:
+    - app-arch/unzip
+  when:
+    - ansible_distribution == "Gentoo"
+- name: Install dependencies
+  apt:
+    pkg:
+      - unzip
+  when:
+    - ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
 - name: Stat cargo-make command
   stat:
     path: /usr/local/bin/hub
