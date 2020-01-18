@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: cargo-make
   author: Hidenori MATSUKI
   description: Install cargo-make command
   issue_tracker_url: https://github.com/mazgi/ansible-galaxy.cargo-make/issues
