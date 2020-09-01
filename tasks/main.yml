@@ -29,9 +29,10 @@
     - name: Download and extract cargo-make for Linux
       when: ansible_system == "Linux" and ansible_architecture == "x86_64"
       unarchive:
-        src: "https://github.com/sagiegurari/cargo-make/releases/download/{{ cargo_make.version }}/cargo-make-v{{ cargo_make.version }}-x86_64-unknown-linux-musl.zip"
+        src: "https://github.com/sagiegurari/cargo-make/releases/download/{{ cargo_make.version }}/cargo-make-v{{ cargo_make.version }}-x86_64-unknown-linux-musl.zip" # noqa 204
         dest: "{{ temporary_directory_for_cargo_make.path }}"
         remote_src: true
+        mode: 0644
     - name: Install cargo-make for Linux
       when: ansible_system == "Linux" and ansible_architecture == "x86_64"
       copy:
@@ -45,6 +46,7 @@
         src: https://github.com/sagiegurari/cargo-make/releases/download/{{ cargo_make.version }}/cargo-make-v{{ cargo_make.version }}-x86_64-apple-darwin.zip
         dest: "{{ temporary_directory_for_cargo_make.path }}"
         remote_src: true
+        mode: 0644
     - name: Install cargo-make for macOS
       when: ansible_distribution == "MacOSX"
       copy:
