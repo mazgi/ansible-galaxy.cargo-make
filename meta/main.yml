@@ -12,15 +12,15 @@ galaxy_info:
 
   platforms:
     # https://galaxy.ansible.com/api/v1/platforms/?name__icontains=macOS
-    - name: macOS
+    - name: MacOSX
       versions:
         - 10.15
         - 10.14
     # https://galaxy.ansible.com/api/v1/platforms/?name__icontains=Ubuntu
     - name: Ubuntu
       versions:
-        - 20.04
-        - 18.04
+        - focal # 20.04
+        - bionic # 18.04
 
   galaxy_tags:
     []
