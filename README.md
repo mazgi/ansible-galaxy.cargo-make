@@ -1,5 +1,7 @@
 # cargo_make
 
+![default](https://github.com/mazgi/ansible-galaxy.cargo-make/workflows/default/badge.svg)
+
 Install [cargo-make](https://github.com/sagiegurari/cargo-make) command.
 
 ## Requirements
