@@ -5,14 +5,12 @@
     update: yes
   with_items:
     - app-arch/unzip
-  when:
-    - ansible_distribution == "Gentoo"
+  when: ansible_os_family == "Gentoo"
 - name: Install dependencies
   apt:
     pkg:
       - unzip
-  when:
-    - ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+  when: ansible_os_family == 'Debian'
 
 - name: Stat cargo-make command
   stat:

@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: cargo_make
-  author: Hidenori MATSUKI
+  author: Hidenori Matsuki
   description: Install cargo-make command
   issue_tracker_url: https://github.com/mazgi/ansible-galaxy.cargo-make/issues
   license: BSD-3-Clause
@@ -11,6 +11,11 @@ galaxy_info:
   # min_ansible_container_version:
 
   platforms:
+    # https://galaxy.ansible.com/api/v1/platforms/?name__icontains=Debian
+    - name: Debian
+      versions:
+        - buster # 10
+        - stretch # 9
     # https://galaxy.ansible.com/api/v1/platforms/?name__icontains=Gentoo
     - name: Gentoo
       versions:
